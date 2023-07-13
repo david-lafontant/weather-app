@@ -31,3 +31,18 @@ else if (response.body.error) {
 
 });
 
+const url2 = `http://api.positionstack.com/v1/forward?access_key=${process.env.GEOCODING_API_KEY}&query=london`
+
+request(url2, (error, response, body) => {
+  try {
+    console.log('statusCode:', response && response.statusCode);
+    const data = JSON.parse(body);
+    console.log(chalk.blue(data.data[0].name));
+    console.log(chalk.blue(data.data[0].latitude));
+    console.log(chalk.blue(data.data[0].longitude));
+  } catch (error) {
+    console.log(chalk.red.inverse("Error in your request"));
+    console.log('Error: ', chalk.red(response.body));
+  }
+});
+
